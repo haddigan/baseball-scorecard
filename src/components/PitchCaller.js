@@ -3,6 +3,7 @@ import Controls from "./Controls";
 
 const INCREMENT_BALLS = "increment balls";
 const INCREMENT_STRIKES = "increment strikes";
+const RESET_COUNT = "reset count";
 
 const increment = (type, previousAmount) => {
   const max = type === "strikes" ? 3 : 4;
@@ -22,6 +23,8 @@ const reducer = (state, action) => {
     }
     case INCREMENT_STRIKES:
       return { ...state, strikes: increment("strikes", state.strikes) };
+    case RESET_COUNT:
+      return { balls: 0, strikes: 0 };
     default:
       return state;
   }
@@ -39,6 +42,10 @@ const PitchCaller = () => {
     dispatch({ type: INCREMENT_STRIKES });
   };
 
+  const handleInPlay = () => {
+    dispatch({ type: RESET_COUNT });
+  };
+
   return (
     <div>
       <div>
@@ -49,7 +56,11 @@ const PitchCaller = () => {
         <h2>Strikes:</h2>
         <span>{strikes}</span>
       </div>
-      <Controls onStrike={handleStrike} onBall={handleBall} />
+      <Controls
+        onStrike={handleStrike}
+        onBall={handleBall}
+        onInPlay={handleInPlay}
+      />
     </div>
   );
 };

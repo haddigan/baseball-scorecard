@@ -4,6 +4,7 @@ import Controls from "./Controls";
 
 const BALL_CONTROL_TEXT = /ball/i;
 const STRIKE_CONTROL_TEXT = /strike/i;
+const IN_PLAY_CONTROL_TEXT = /in play/i;
 
 it("has a control to increment balls", () => {
   const { getByText } = render(<Controls />);
@@ -33,4 +34,13 @@ it("can increment strikes", () => {
   fireEvent.click(screen.getByText(STRIKE_CONTROL_TEXT));
 
   expect(handleStrike).toBeCalledTimes(1);
+});
+
+it("handles a ball in play", () => {
+  const handleInPlay = jest.fn();
+  const { getByText } = render(<Controls onInPlay={handleInPlay} />);
+
+  fireEvent.click(getByText(IN_PLAY_CONTROL_TEXT));
+
+  expect(handleInPlay).toBeCalledTimes(1);
 });

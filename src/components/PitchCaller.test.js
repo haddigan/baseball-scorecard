@@ -79,3 +79,23 @@ it("resets count after strike 3", () => {
   // should reset counter
   expect(total).toHaveTextContent("0");
 });
+
+it("resets count when a ball is in play", () => {
+  const { getByRole } = render(<PitchCaller />);
+  const strikeButton = getByRole("button", { name: /strike/i });
+  const ballButton = getByRole("button", { name: /ball/i });
+  const inPlayButton = getByRole("button", { name: /in play/i });
+  const strikeTotal = getByRole("heading", { name: /^strikes/i }).nextSibling;
+  const ballTotal = getByRole("heading", { name: /^balls/i }).nextSibling;
+
+  // ball one
+  fireEvent.click(ballButton);
+  // strike one
+  fireEvent.click(strikeButton);
+  // ball in play
+  fireEvent.click(inPlayButton);
+
+  // should reset counter
+  expect(ballTotal).toHaveTextContent("0");
+  expect(strikeTotal).toHaveTextContent("0");
+});
