@@ -47,9 +47,7 @@ it("increments balls", () => {
 });
 
 it("resets count when after ball 4", () => {
-  const { getByRole } = render(
-    <PitchCaller initialCount={{ balls: 3, strikes: 0 }} />
-  );
+  const { getByRole } = render(<PitchCaller initialBalls={3} />);
   const button = getByRole("button", { name: /ball/i });
   const total = getByRole("heading", { name: /^balls/i }).nextSibling;
 
@@ -61,9 +59,7 @@ it("resets count when after ball 4", () => {
 });
 
 it("resets count after strike 3", () => {
-  const { getByRole } = render(
-    <PitchCaller initialCount={{ strikes: 2, balls: 0 }} />
-  );
+  const { getByRole } = render(<PitchCaller initialStrikes={2} />);
   const button = getByRole("button", { name: /strike/i });
   const total = getByRole("heading", { name: /^strikes/i }).nextSibling;
 
@@ -76,7 +72,7 @@ it("resets count after strike 3", () => {
 
 it("resets count when a ball is in play", () => {
   const { getByRole } = render(
-    <PitchCaller initialCount={{ balls: 3, strikes: 2 }} />
+    <PitchCaller initialBalls={3} initialStrikes={2} />
   );
 
   const inPlayButton = getByRole("button", { name: /in play/i });

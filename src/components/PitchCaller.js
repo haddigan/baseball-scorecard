@@ -32,7 +32,8 @@ const reducer = (state, action) => {
   }
 };
 
-const PitchCaller = ({ initialCount }) => {
+const PitchCaller = ({ initialBalls = 0, initialStrikes = 0 }) => {
+  const initialCount = { balls: initialBalls, strikes: initialStrikes };
   const [state, dispatch] = useReducer(reducer, initialCount);
   const { balls, strikes } = state;
 
@@ -67,15 +68,9 @@ const PitchCaller = ({ initialCount }) => {
   );
 };
 
-PitchCaller.defaultProps = {
-  initialCount: { balls: 0, strikes: 0 },
-};
-
 PitchCaller.propTypes = {
-  initialCount: PropTypes.shape({
-    balls: PropTypes.number,
-    strikes: PropTypes.number,
-  }),
+  initialBalls: PropTypes.number,
+  initialStrikes: PropTypes.number,
 };
 
 export default PitchCaller;
