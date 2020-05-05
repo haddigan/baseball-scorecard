@@ -1,4 +1,6 @@
 import React, { useReducer } from "react";
+import PropTypes from "prop-types";
+
 import Controls from "./Controls";
 
 const INCREMENT_BALLS = "increment balls";
@@ -30,8 +32,8 @@ const reducer = (state, action) => {
   }
 };
 
-const PitchCaller = () => {
-  const [state, dispatch] = useReducer(reducer, { balls: 0, strikes: 0 });
+const PitchCaller = ({ initialCount }) => {
+  const [state, dispatch] = useReducer(reducer, initialCount);
   const { balls, strikes } = state;
 
   const handleBall = () => {
@@ -63,6 +65,17 @@ const PitchCaller = () => {
       />
     </div>
   );
+};
+
+PitchCaller.defaultProps = {
+  initialCount: { balls: 0, strikes: 0 },
+};
+
+PitchCaller.propTypes = {
+  initialCount: PropTypes.shape({
+    balls: PropTypes.number,
+    strikes: PropTypes.number,
+  }),
 };
 
 export default PitchCaller;
