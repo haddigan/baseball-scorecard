@@ -1,4 +1,5 @@
 import React from "react";
+import PitchCaller from "./components/PitchCaller";
 
 function App() {
   return (
@@ -6,6 +7,7 @@ function App() {
       <header className="App-header">
         <h1>Scorecard</h1>
       </header>
+      <PitchCaller />
     </div>
   );
 }
