@@ -1,26 +1,42 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import Controls from "./Controls";
 
+const INCREMENT_BALLS = "increment balls";
+const INCREMENT_STRIKES = "increment strikes";
+
+const increment = (type, previousAmount) => {
+  const max = type === "strikes" ? 3 : 4;
+  const newAmount = previousAmount + 1;
+
+  if (newAmount === max) {
+    return 0;
+  }
+
+  return newAmount;
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case INCREMENT_BALLS: {
+      return { ...state, balls: increment("balls", state.balls) };
+    }
+    case INCREMENT_STRIKES:
+      return { ...state, strikes: increment("strikes", state.strikes) };
+    default:
+      return state;
+  }
+};
+
 const PitchCaller = () => {
-  const [balls, setBalls] = useState(0);
-  const [strikes, setStrikes] = useState(0);
+  const [state, dispatch] = useReducer(reducer, { balls: 0, strikes: 0 });
+  const { balls, strikes } = state;
 
   const handleBall = () => {
-    setBalls((prevBalls) => {
-      if (prevBalls < 3) {
-        return prevBalls + 1;
-      }
-      return 0;
-    });
+    dispatch({ type: INCREMENT_BALLS });
   };
 
   const handleStrike = () => {
-    setStrikes((prevStrikes) => {
-      if (prevStrikes < 2) {
-        return prevStrikes + 1;
-      }
-      return 0;
-    });
+    dispatch({ type: INCREMENT_STRIKES });
   };
 
   return (
