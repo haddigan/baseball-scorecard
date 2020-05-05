@@ -25,8 +25,14 @@ const PitchCaller = () => {
 
   return (
     <div>
-      <div>Balls: {balls}</div>
-      <div>Strikes: {strikes}</div>
+      <div>
+        <h2>Balls:</h2>
+        <span>{balls}</span>
+      </div>
+      <div>
+        <h2>Strikes:</h2>
+        <span>{strikes}</span>
+      </div>
       <Controls onStrike={handleStrike} onBall={handleBall} />
     </div>
   );

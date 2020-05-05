@@ -6,9 +6,25 @@ it("renders", () => {
   render(<PitchCaller />);
 });
 
-it.todo("shows the current number of balls");
+it("shows the current number of balls", () => {
+  const { getByRole } = render(<PitchCaller />);
 
-it.todo("shows the current number of strikes");
+  const heading = getByRole("heading", { name: /^balls/i });
+  const total = heading.nextSibling;
+
+  expect(heading).toBeInTheDocument();
+  expect(total).toHaveTextContent("0");
+});
+
+it("shows the current number of strikes", () => {
+  const { getByRole } = render(<PitchCaller />);
+
+  const heading = getByRole("heading", { name: /^strikes/i });
+  const total = heading.nextSibling;
+
+  expect(heading).toBeInTheDocument();
+  expect(total).toHaveTextContent("0");
+});
 
 it.todo("increments strikes");
 
