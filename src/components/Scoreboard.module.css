@@ -1,0 +1,23 @@
+.count {
+  display: flex;
+}
+
+.totals {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.value {
+  display: flex;
+  min-width: 40px;
+  min-height: 40px;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  margin: 0 10px 0 0;
+  padding: 0;
+}

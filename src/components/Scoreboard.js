@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./Scoreboard.module.css";
 
 const Scoreboard = ({ game = {} }) => {
   const { count = {} } = game;
@@ -9,14 +10,14 @@ const Scoreboard = ({ game = {} }) => {
   const balls = Array(numBalls).fill("X");
 
   return (
-    <div>
-      <div className="Balls">
-        <h3 className="label">Balls:</h3>
-        <div className="value">{balls.concat(" ")}</div>
+    <div className={styles.count}>
+      <div className={styles.totals}>
+        <h3 className={styles.label}>Balls:</h3>
+        <div className={styles.value}>{balls.concat(" ")}</div>
       </div>
-      <div className="Strikes">
-        <h3 className="label">Strikes:</h3>
-        <div className="value">{strikes.concat(" ")}</div>
+      <div className={styles.totals}>
+        <h3 className={styles.label}>Strikes:</h3>
+        <div className={styles.value}>{strikes.concat(" ")}</div>
       </div>
     </div>
   );
