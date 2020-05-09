@@ -21,9 +21,17 @@ const increment = (type, previousAmount) => {
 const reducer = (state, action) => {
   switch (action.type) {
     case INCREMENT_BALLS: {
+      const newBalls = increment("balls", state.balls);
+      if (newBalls === 0) {
+        return { ...state, balls: 0, strikes: 0 };
+      }
       return { ...state, balls: increment("balls", state.balls) };
     }
     case INCREMENT_STRIKES:
+      const newStrikes = increment("strikes", state.strikes);
+      if (newStrikes === 0) {
+        return { ...state, balls: 0, strikes: 0 };
+      }
       return { ...state, strikes: increment("strikes", state.strikes) };
     case RESET_COUNT:
       return { balls: 0, strikes: 0 };
